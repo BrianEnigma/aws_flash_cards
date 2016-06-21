@@ -27,7 +27,7 @@ COLOR_MAP = {
 
 SHADOW_COLOR_MAP = {
     "red" => "gray40",
-    "black" => "gray90",
+    "black" => "gray70",
 }
 
 if ARGV.length != 1
@@ -119,7 +119,7 @@ def generate(card, filename)
     border.draw(i)
     border = Magick::Draw.new
     border.fill = 'white'
-    border.roundrectangle(SAFE_OFFSET_X, SAFE_OFFSET_Y, SAFE_OFFSET_X + SAFE_WIDTH, SAFE_OFFSET_Y + SAFE_HEIGHT, 10, 10)
+    border.roundrectangle(SAFE_OFFSET_X + COLOR_BORDER_WIDTH, SAFE_OFFSET_Y + COLOR_BORDER_WIDTH, SAFE_OFFSET_X + SAFE_WIDTH - COLOR_BORDER_WIDTH, SAFE_OFFSET_Y + SAFE_HEIGHT - COLOR_BORDER_WIDTH, 10, 10)
     border.draw(i)
     
     # Draw card number and suit
@@ -129,30 +129,30 @@ def generate(card, filename)
     text.pointsize = 100
     text.gravity = Magick::NorthWestGravity
     #text.rotate(180)
-    text_offset_x = 30
-    text_offset_y = 10
+    text_offset_x = 10
+    text_offset_y = -12
     shadow_offset = 3
     [0, 180].each { |rotation|
         i.rotate!(rotation)
-        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + text_offset_x + shadow_offset, SAFE_OFFSET_Y + text_offset_y + shadow_offset, card_value) {
+        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + text_offset_x + shadow_offset, SAFE_OFFSET_Y + COLOR_BORDER_WIDTH + text_offset_y + shadow_offset, card_value) {
             self.fill = shadow_color 
         }
-        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + text_offset_x, SAFE_OFFSET_Y + text_offset_y, card_value) { 
+        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + text_offset_x, SAFE_OFFSET_Y + COLOR_BORDER_WIDTH + text_offset_y, card_value) { 
             self.fill = suit_color 
         }
     }
     
     # Draw the icon
     icon = Magick::Image.read(card.full_image) { #"#{IMAGE_BASE}/#{card.category}/#{card.image}") {
-        self.density = 300
+        self.density = 250
     }
     icon = icon.first
     # Apparently the following line is required to rasterize the EPS with 
     # the correct colors? Without it, I'd get weirdly inverted colors in the
     # composite function.
     icon.write("output/test.png")
-    i = i.composite(icon, (WIDTH - icon.columns) / 2, 350, Magick::OverCompositeOp) {
-        self.geometry = '500x500+10+10'
+    i = i.composite(icon, (WIDTH - icon.columns) / 2, 380, Magick::OverCompositeOp) {
+        #self.geometry = '500x500+10+10'
     }
     
     # Draw the name
@@ -163,11 +163,11 @@ def generate(card, filename)
     name = card.name
     if !card.full_name.empty?
         name << "\n#{card.full_name}"
-        offset = 120
+        offset = 130
     else
         offset = 65
     end
-    y = SAFE_OFFSET_Y + 120
+    y = SAFE_OFFSET_Y + 130
     text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X, y, "#{name}") {
         self.fill = 'black' 
     }
@@ -182,11 +182,11 @@ def generate(card, filename)
     text.pointsize = 28
     text.gravity = Magick::NorthWestGravity
     description = "#{card.long_description}"
-    magic_number = 380
+    magic_number = 350
     description = fit_text(description, magic_number)
     description += "\nSimilar to: #{card.similar}" if !card.similar.empty?
-    offset = 775
-    text.annotate(i, SAFE_WIDTH - 60, SAFE_HEIGHT, SAFE_OFFSET_X + 30, offset, description) {
+    offset = 725
+    text.annotate(i, SAFE_WIDTH - 60, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + 15, offset, description) {
         self.fill = 'black'
     }
     
@@ -195,8 +195,8 @@ def generate(card, filename)
     text.font = 'Helvetica-Narrow'
     text.pointsize = 18
     text.gravity = Magick::NorthWestGravity
-    aws_flash_cards = "AWS Flash Cards\nv#{VERSION}, #{Time.new.strftime('%Y-%m-%d')}, by @BrianEnigma, http://nja.me/awscards\nProduced under the Creative Commons\nAttribution-ShareAlike 4.0 International License"
-    text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + 30, SAFE_OFFSET_Y + SAFE_HEIGHT - 95, aws_flash_cards) {
+    aws_flash_cards = "AWS Flash Cards\nv#{VERSION}, #{Time.new.strftime('%Y-%m-%d')}, http://nja.me/awscards\nProduced under the Creative Commons\nAttribution-ShareAlike 4.0 International License"
+    text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + 15, SAFE_OFFSET_Y + SAFE_HEIGHT - COLOR_BORDER_WIDTH - 75, aws_flash_cards) {
         self.fill = 'gray70' 
     }
     
