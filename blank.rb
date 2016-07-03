@@ -2,7 +2,7 @@
 require "csv"
 require "RMagick"
 
-VERSION = "1.0"
+VERSION = "1.1"
 
 WIDTH = 825
 HEIGHT = 1125
@@ -55,10 +55,10 @@ def generate(bordercolor, textcolor, fieldcolor, text_string, filename)
         #AWS Flash Cards footer
         text = Magick::Draw.new
         text.font = 'Helvetica-Narrow'
-        text.pointsize = 18
+        text.pointsize = 28
         text.gravity = Magick::NorthWestGravity
-        aws_flash_cards = "AWS Flash Cards\nv#{VERSION}, #{Time.new.strftime('%Y-%m-%d')}, http://nja.me/awscards\nProduced under the Creative Commons\nAttribution-ShareAlike 4.0 International License"
-        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + 15, SAFE_OFFSET_Y + SAFE_HEIGHT - COLOR_BORDER_WIDTH - 75, aws_flash_cards) {
+        aws_flash_cards = "AWS Flash Cards\nv#{VERSION}, #{Time.new.strftime('%Y-%m-%d')}\nhttp://nja.me/awscards"
+        text.annotate(i, SAFE_WIDTH, SAFE_HEIGHT, SAFE_OFFSET_X + COLOR_BORDER_WIDTH + 15, SAFE_OFFSET_Y + SAFE_HEIGHT - COLOR_BORDER_WIDTH - 84, aws_flash_cards) {
             self.fill = 'gray70' 
         }
     end
