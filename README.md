@@ -4,6 +4,8 @@
 
 Hi there. I'm Brian. I work for a company that got acquired by Amazon Web Services. While I've used a few of the more popular services (EC2, S3) in the past, I quickly came to realize that there were _*WAY*_ more services than I thought — many with similar or obtuse names. To help me learn, I thought I'd make some flash cards. It turns out there were more than 52 services, so I figured I'd grab enough to make a deck of playing cards. This is that deck! (Plus the scripts to generate the image assets as well as those images themselves.) I hope you enjoy!
 
+This project lives on Github at <https://github.com/BrianEnigma/aws_flash_cards>. It also lives on AWS CodeCommit, but I'm still trying to figure out if I can open that repo to the public. (Ping me if you know how.)
+
 ##License
 
 The script to generate the images for the card deck was written in 2016 by me, Brian Enigma <brian@netninja.com>. It is released under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <http://creativecommons.org/licenses/by-sa/4.0/>.
