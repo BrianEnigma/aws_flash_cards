@@ -6,6 +6,8 @@ Hi there. I'm Brian. I work for a company that got acquired by Amazon Web Servic
 
 This project lives on Github at <https://github.com/BrianEnigma/aws_flash_cards>. It also lives on AWS CodeCommit, but I'm still trying to figure out if I can open that repo to the public. (Ping me if you know how.)
 
+You can read more about the thought-process that led to this project, its history, and design at this blog post: <https://netninja.com/2016/07/04/designing-amazon-web-services-playing-cards/>
+
 ![AWS Flash Cards](cards.jpg)
 
 ##License
