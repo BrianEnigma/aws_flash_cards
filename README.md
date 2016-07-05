@@ -6,6 +6,8 @@ Hi there. I'm Brian. I work for a company that got acquired by Amazon Web Servic
 
 This project lives on Github at <https://github.com/BrianEnigma/aws_flash_cards>. It also lives on AWS CodeCommit, but I'm still trying to figure out if I can open that repo to the public. (Ping me if you know how.)
 
+![AWS Flash Cards](cards.jpg)
+
 ##License
 
 The script to generate the images for the card deck was written in 2016 by me, Brian Enigma <brian@netninja.com>. It is released under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <http://creativecommons.org/licenses/by-sa/4.0/>.
@@ -26,6 +28,12 @@ The images are pre-generated and can be found here:
     - `./joker2.png`
 - Card Back:
     - `./reverse.png`
+
+**Examples (Click for Detail)**
+
+|              Main Cards               |         Joker         |         Joker         |         Reverse         |  
+| :-----------------------------------: | :-------------------: | :-------------------: | :---------------------: |  
+| ![Ace of Spades](output/spades-A.png) | ![Joker1](joker1.png) | ![Joker2](joker2.png) | ![Reverse](reverse.png) |  
 
 ##Generating Card Images
 
